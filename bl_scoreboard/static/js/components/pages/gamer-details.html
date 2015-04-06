@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-offset-2">
+      <div class="page-header">
+        <h1>Игрок</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <form class="form-horizontal validated-form" novalidate name="userDetailsForm">
+      <div class="form-group" ng-class="userDetailsForm.phone.$invalid ? 'has-error' : 'has-success'">
+        <label for="telInput" class="col-sm-4 control-label">Телефон</label>
+        <div class="col-sm-6">
+          <input type="tel" class="form-control" id="telInput" placeholder="71234567890" ng-model="gamer.phone" ng-disabled="detailsMode == 'edit'" name="phone" required ng-pattern="/[0-9]{6,}/">
+        </div>
+      </div>
+      <div class="form-group" ng-class="userDetailsForm.name.$invalid ? 'has-error' : 'has-success'">
+        <label for="nameInput" class="col-sm-4 control-label">Имя игрока</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="nameInput" placeholder="Имя" ng-model="gamer.name" name="name" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="gameSelect" class="col-sm-4 control-label">Участие в играх</label>
+        <div class="col-sm-6">
+          <input type="hidden" class="form-control" id="gameSelect" ui-select2="s2GameTagsOptions" ng-model="selectGame" placeholder="Игры">
+        </div>
+      </div>
+      <div class="form-group" ng-repeat="tag in selectGame">
+        <label for="inputScore-{{tag.id}}" class="col-sm-4 control-label">Счет в игре '{{tag.text}}'</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <input type="number" class="form-control" id="inputScore-{{tag.id}}" ng-model="gamer.score[tag.id]" ng-init="gamer.score[tag.id]=gamer.score[tag.id]||0" placeholder="Счет">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, -10)">-10</button>
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, -5)">-5</button>
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, -1)">-1</button>
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, 1)">+1</button>
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, 5)">+5</button>
+              <button type="button" class="btn btn-default" ng-click="adjClick(tag.id, 10)">+10</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-7">
+          <div class="btn-group">
+            <button type="submit" class="btn btn-default" ng-click="submitClick()" ng-disabled="userDetailsForm.$invalid">Запомнить</button>
+            <button type="submit" class="btn btn-default btn-danger" ng-click="prizeGivenClick()" ng-disabled="userDetailsForm.$invalid">Выдать приз</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" modal-dialog-to-scope-as="prizeGivenModal" role="dialog" aria-labelledby="prizeGivenModal" aria-hidden="true">
+  <div class="modal-dialog" data-toggle="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="prizeGivenModal">Приз выдан</h4>
+      </div>
+      <div class="modal-body">
+        <p>Игрок получил приз и заканчивает игру</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary" ng-click="prizeGivenAcceptClick()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" modal-dialog-to-scope-as="alertPrizeGivenModal" role="dialog" aria-labelledby="alertPrizeGivenModal" aria-hidden="true" data-keyboard="false">
+  <div class="modal-dialog" data-toggle="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="alertPrizeGivenModal">Приз уже выдан</h4>
+      </div>
+      <div class="modal-body">
+        <p>Игрок уже получил приз.<br>Повторное участие в игре запрещено!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="leaveGamerDetailsClick()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" modal-dialog-to-scope-as="gamerAlreadyRegistered" role="dialog" aria-labelledby="gamerAlreadyRegistered" aria-hidden="true" data-keyboard="false">
+  <div class="modal-dialog" data-toggle="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="gamerAlreadyRegistered">Игрок уже зарегистрирован</h4>
+      </div>
+      <div class="modal-body">
+        <p>Игрок с таким номером телефона уже зарегистрирован!<br>
+          Используйте поиск на верхней панели, чтобы найти игрока</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+/* this style is for proper padding of navbar which is tailored to top of window */
+body { padding-top: 70px; }
+
+/* gets 'Open Sans' font from local server */
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url(../fonts/opensans-400-latin-cyrillic.woff) format('woff');
+}

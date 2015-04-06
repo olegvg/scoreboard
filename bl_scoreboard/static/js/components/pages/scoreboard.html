@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-offset-2">
+      <div class="page-header">
+        <h1>Рекорды</h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-offset-2">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <tr>
+            <th>Место</th>
+            <th>Телефон</th>
+            <th>Имя</th>
+            <th>Поинты</th>
+          </tr>
+          <tr ng-repeat="score in scoreBoard">
+            <td>{{$index+1}}</td>
+            <td><a href="#gamer/{{score.phone}}">{{score.phone}}</a></td>
+            <td>{{score.name}}</td>
+            <td>{{score.score}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

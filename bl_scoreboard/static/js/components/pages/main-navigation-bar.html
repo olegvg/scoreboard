@@ -1,0 +1,41 @@
+<div class="container-fluid" ng-cloak>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-main-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <p class="navbar-brand">Scoreboard</p>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-main-navbar-collapse-1">
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group" ng-controller="NavSearchPhoneCtrl">
+            <input type="hidden" class="form-control" ui-select2="s2SearchOptions" ng-model="searchPhone" ng-click="phoneSearchClick()" placeholder="Поиск по телефону">
+          </div>
+        </form>
+        <p class="navbar-text" style="margin-left: 0;">или</p>
+        <a href="#gamer" class="btn btn-default navbar-btn" role="button">Новый игрок</a>
+        <a href="#" class="btn btn-default navbar-btn" role="button">Рекорды</a>
+
+        <ul class="nav navbar-nav navbar-right" ng-controller="AuthOpsCtrl">
+          <li class="dropdown" ng-show="isLoggedIn">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{login}} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" ng-click="logoutClick()">Выход</a></li>
+            </ul>
+          </li>
+          <li class="active" ng-hide="isLoggedIn">
+              <a href="#" ng-click="loginClick()">Вход</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+</div>
